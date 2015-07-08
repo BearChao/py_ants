@@ -29,7 +29,7 @@ class Visual(object):#set visual window
             self.clock.tick(30)
 def main():
     os.environ['SDL_VIDEO_CENTERED'] = '1'
-    simulator = Simulator(500)
+    simulator = Simulator(400,(400,400))
     visual = Visual((400, 400), simulator)
     visual.run()
 

@@ -9,30 +9,28 @@ class Ant(object):#ant entity
     #location:x,y,
     #status:pass
     #lm:last move status
-    __slots__=['x','y','status','lm']
-    def __init__(self,x,y,status):
+    __slots__=['x','y','status','lm','touch','see','moved']
+    def __init__(self,x,y,status,lm):
         self.x = x
         self.y = y
         self.status = status
-        self.lm = 1
+        self.lm = lm #从上一次地点指向现在地点的方向
+        self.touch = 4 #circle.d
+        self.see = 10
+        self.moved = False
     #1:up,4:down,2:lift,3:right
-    def moveU(self):self.y+=1
-    def moveD(self):self.y-=1
+    def moveU(self):self.y-=1
+    def moveD(self):self.y+=1
     def moveL(self):self.x-=1
     def moveR(self):self.x+=1
-    def move(self):
-        l = [1,4,2,3]
-        l.remove(5-self.lm)#ant can't move back,5-a=b
-        d=random.choice(l)
-        if  (d==1):
-            self.moveU()
-        elif(d==4):
-            self.moveD()
-        elif(d==2):
-            self.moveL()
-        elif(d==3):
-            self.moveR()
-        self.lm = d
+    def moveBack(self):
+        m = 5-self.lm
+        if(m==1):self.moveU()
+        if(m==4):self.moveD()
+        if(m==2):self.moveL()
+        if(m==3):self.moveR()
+        self.moved = True
+
 
 
 
